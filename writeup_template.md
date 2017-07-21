@@ -46,7 +46,7 @@ First, the pipeline is tested on sample images. A sample of the input images is:
 
 and after passing to the pipeline the lines are detected on the image: 
 
-<img src="test_images_output/solidYellowCurve.jpg" width="200" alt="Combined Image" /><img src="test_images_output/solidYellowCurve.jpg" width="200" alt="Combined Image" />
+<img src="test_images_output/solidYellowCurve.jpg" width="200" alt="Combined Image" />..<img src="test_images_output/solidYellowCurve.jpg" width="200" alt="Combined Image" />
 
 ### On videos
 
