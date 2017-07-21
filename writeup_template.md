@@ -42,8 +42,12 @@ The drawline() function takes the Hough lines and:
 ### On images:
 First, the pipeline is tested on sample images. A sample of the input images is:
 
-<img src="test_images/solidWhiteCurve.jpg" width="200" alt="Combined Image" /> <img src="test_images/solidWhiteRight.jpg" width="200" alt="Combined Image" /> <img src="test_images/solidYellowCurve.jpg" width="200" alt="Combined Image" /> <img src="test_images/solidYellowCurve2.jpg" width="200" alt="Combined Image" /> <img src="test_images/solidYellowLeft.jpg" width="200" alt="Combined Image" />
-src="test_images/whiteCarLaneSwitch.jpg" width="200" alt="Combined Image" />
+<img src="test_images/solidWhiteCurve.jpg" width="300" alt="Combined Image" /> 
+<img src="test_images/solidWhiteRight.jpg" width="300" alt="Combined Image" /> 
+<img src="test_images/solidYellowCurve.jpg" width="300" alt="Combined Image" /> 
+<img src="test_images/solidYellowCurve2.jpg" width="300" alt="Combined Image" /> 
+<img src="test_images/solidYellowLeft.jpg" width="300" alt="Combined Image" /> 
+<img src="test_images/whiteCarLaneSwitch.jpg" width="300" alt="Combined Image" />
 
 and after passing to the pipeline the lines are detected on the image: 
 
