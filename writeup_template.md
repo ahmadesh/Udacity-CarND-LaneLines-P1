@@ -1,12 +1,11 @@
 # **Finding Lane Lines on the Road** 
 
-The goals of this project is to make a pipeline that finds lane lines on the road.
+<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
 
-[//]: # (Image References)
-
+Overview
 ---
 
-### 1. Description of the pieline:
+### Description of the pieline:
 
 My pipeline consisted of the following steps.
 
@@ -26,11 +25,20 @@ My pipeline consisted of the following steps.
 
 The drawline() function takes the Hough lines and:
 
-* Separates the left and right lines coordinates based on thier slopes
-* Fits a first order polynomial (line) over the ()
+* Separates the left and right lines coordinates based on thier slopes. In case no left or right line is detected, or variance of the line slopes is abnormal, the function returns the lines from previous frame.
+* Fits a first order polynomial (line) over the coordinates (x,y) of the left and right Hough lines.
+* Calculates the coordinates of the continues left and right lines based on the fit parameters.
+* Combines the line coordinates of the current frame (previous step) with the previous frame with a ratio.
+* Adds the left and right lines to a blank image 
+
+Description of the pieline:
+
+
+
+### Test on images:
+First, the pipeline is tested on sample images. A sample of the input images is:
 
 ![alt text][image1]
-
 
 ### 2. Identify potential shortcomings with your current pipeline
 
