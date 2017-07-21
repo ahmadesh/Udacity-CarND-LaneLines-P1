@@ -11,13 +11,23 @@ The goals of this project is to make a pipeline that finds lane lines on the roa
 My pipeline consisted of the following steps.
 
 1- Conversion to grayscale
+
 2- Masking the grayscale image with white and yellow color masks
+
 3- Gaussian blur with kernel 5
+
 4- Canny edge detection
+
 5- Region of interest masking
+
 6- Hough transform and draw-line() function to detect the left and right lines and drawing them on the image 
+
 7 - Overlaying the line image on original image.
 
+The drawline() function takes the Hough lines and:
+
+* Separates the left and right lines coordinates based on thier slopes
+* Fits a first order polynomial (line) over the ()
 
 ![alt text][image1]
 
