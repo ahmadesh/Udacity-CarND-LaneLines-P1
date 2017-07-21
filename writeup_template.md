@@ -40,32 +40,36 @@ The drawline() function takes the Hough lines and:
 ## Test
 
 ### On images:
-First, the pipeline is tested on sample images. A sample of the input images is:
+First, the pipeline is tested on the sample images. The input images are:
 
 <img src="test_images/solidWhiteCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidWhiteRight.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidYellowCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidYellowCurve2.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidYellowLeft.jpg" width="250" alt="Combined Image" /> <img src="test_images/whiteCarLaneSwitch.jpg" width="250" alt="Combined Image" />
 
-and after passing to the pipeline the lines are detected on the image: 
+after passing to the pipeline, the lines are detected and drawn on the images: 
 
 <img src="test_images_output/solidWhiteCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidWhiteRight.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidYellowCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidYellowCurve2.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidYellowLeft.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/whiteCarLaneSwitch.jpg" width="250" alt="Combined Image" />
 
 ### On videos
 
-The pipline is also tested on the video frames of "solidWhiteRight.mp4" and "solidYellowLeft.mp4" in the "test_videos" folder. The outputs videos are saved in the "test_videos_output" folder and showes that the lines are detected.
+The pipline is also tested on the video frames of "solidWhiteRight.mp4" and "solidYellowLeft.mp4" in the "test_videos" folder. The outputs videos are saved in the "test_videos_output" folder and the lines are detected correctly.
 
 ## Identify potential shortcomings with your current pipeline
 
 Potential shorcommings are when:
 
-1- Low light condition (e.g. at night, tunnel)
+* Low light condition (e.g. at night, tunnel)
 
-2- Lines have collors other than yellow or white
+* Lines have collors other than yellow or white
 
-3- There are other objects in the masked region of the image (e.g. roadside guard, not uniform road color)
+* There are other objects in the masked region of the image (e.g. roadside guard, not uniform road color)
 
-4- The road turns sharply
+* The road turns sharply
 
-5- The road has one line or no line
+* The road has one line or no line
 
 ## Suggest possible improvements to your pipeline
 
-A possible improvement would be to:
+Possible improvement would be to:
+
+* use methods like Kalman Filter to filter the detection in noisy frames
+
+* Consider the thickness of the lines for valid Hough lines
