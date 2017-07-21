@@ -1,53 +1,75 @@
 # **Finding Lane Lines on the Road** 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
+<img src="test_images_output/solidYellowCurve.jpg" width="480" alt="Combined Image" />
 
-Overview
 ---
 
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+## Overview
 
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
+When we drive, we use our eyes to decide where to go. The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle. Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
 
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
+In this project, as part of the Udacity SDCND, a pipeline that detects lane lines in images using Python and OpenCV is developed.
 
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
+## Description of the pieline
 
+My pipeline consisted of the following steps.
 
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
+1- Conversion to grayscale
 
-1. Describe the pipeline
+2- Masking the grayscale image with white and yellow color masks
 
-2. Identify any shortcomings
+3- Gaussian blur with kernel 5
 
-3. Suggest possible improvements
+4- Canny edge detection
 
-We encourage using images in your writeup to demonstrate how your pipeline works.  
+5- Region of interest masking
 
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
+6- Hough transform and draw-line() function to detect the left and right lines and drawing them on the image 
 
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+7 - Overlaying the line image on original image.
 
+The drawline() function takes the Hough lines and:
 
-The Project
----
+* Separates the left and right lines coordinates based on the line slopes. In case no left or right line is detected, or variance of the line slopes is abnormal, the function returns the lines from previous successfull frame.
+* Fits a first order polynomial (line) over the coordinates (x,y) of the left and right Hough lines.
+* Calculates the coordinates of the continues left and right lines based on the fitting parameters.
+* If the left and right lines cross each other, calcluates the intersection and replaces the top points to the intersection.
+* Combines the line coordinates of the current frame (previous step) with the previous frame (makes the predictions smooth).
+* Adds the left and right lines to a blank image and returns the image
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
+## Test
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
+### On images:
+First, the pipeline is tested on the sample images. The input images are:
 
-**Step 2:** Open the code in a Jupyter Notebook
+<img src="test_images/solidWhiteCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidWhiteRight.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidYellowCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidYellowCurve2.jpg" width="250" alt="Combined Image" /> <img src="test_images/solidYellowLeft.jpg" width="250" alt="Combined Image" /> <img src="test_images/whiteCarLaneSwitch.jpg" width="250" alt="Combined Image" />
 
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
+after passing to the pipeline, the lines are detected and drawn on the images: 
 
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
+<img src="test_images_output/solidWhiteCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidWhiteRight.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidYellowCurve.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidYellowCurve2.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/solidYellowLeft.jpg" width="250" alt="Combined Image" /> <img src="test_images_output/whiteCarLaneSwitch.jpg" width="250" alt="Combined Image" />
 
-`> jupyter notebook`
+### On videos
 
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
+The pipline is also tested on the video frames of "solidWhiteRight.mp4" and "solidYellowLeft.mp4" in the "test_videos" folder. The outputs videos are saved in the "test_videos_output" folder and the lines are detected correctly.
 
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
+## Identify potential shortcomings with your current pipeline
 
+Potential shorcommings are when:
+
+* Low light condition (e.g. at night, tunnel)
+
+* Lines have collors other than yellow or white
+
+* There are other objects in the masked region of the image (e.g. roadside guard, not uniform road color)
+
+* The road turns sharply
+
+* The road has one line or no line
+
+## Suggest possible improvements to your pipeline
+
+Possible improvement would be to:
+
+* Use methods like Kalman Filter to filter the detection in noisy frames
+
+* Consider the thickness of the lines for detecting valid Hough lines
