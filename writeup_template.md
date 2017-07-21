@@ -30,12 +30,12 @@ My pipeline consisted of the following steps.
 
 The drawline() function takes the Hough lines and:
 
-* Separates the left and right lines coordinates based on thier slopes. In case no left or right line is detected, or variance of the line slopes is abnormal, the function returns the lines from previous frame.
+* Separates the left and right lines coordinates based on the line slopes. In case no left or right line is detected, or variance of the line slopes is abnormal, the function returns the lines from previous successfull frame.
 * Fits a first order polynomial (line) over the coordinates (x,y) of the left and right Hough lines.
-* Calculates the coordinates of the continues left and right lines based on the fit parameters.
+* Calculates the coordinates of the continues left and right lines based on the fitting parameters.
 * If the left and right lines cross each other, calcluates the intersection and replaces the top points to the intersection.
-* Combines the line coordinates of the current frame (previous step) with the previous frame with a ratio.
-* Adds the left and right lines to a blank image 
+* Combines the line coordinates of the current frame (previous step) with the previous frame (makes the predictions smooth).
+* Adds the left and right lines to a blank image and returns the image
 
 ## Test
 
@@ -70,6 +70,6 @@ Potential shorcommings are when:
 
 Possible improvement would be to:
 
-* use methods like Kalman Filter to filter the detection in noisy frames
+* Use methods like Kalman Filter to filter the detection in noisy frames
 
-* Consider the thickness of the lines for valid Hough lines
+* Consider the thickness of the lines for detecting valid Hough lines
